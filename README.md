@@ -1,5 +1,5 @@
 # this demo for v2ray-controller
-> 此项目是一个v2ray代理控制台，用于管理v2ray+nginx的配置、，当前版本为第一版，稳定性正在测试中
+> 此项目是一个[v2ray](https://www.v2ray.com/)代理控制台，用于管理v2ray+nginx的配置、，当前版本为第一版，稳定性正在测试中
 > 
 > 开发文档以及项目说明会随着项目的更新逐步完善
 ****
