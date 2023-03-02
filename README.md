@@ -1,7 +1,7 @@
 # this demo for v2ray-controller
 > 此项目是一个[v2ray](https://www.v2ray.com/)代理控制台，用于管理v2ray+nginx的配置、，当前版本为第一版，稳定性正在测试中
 > 
-> 开发文档以及项目说明会随着项目的更新逐步完善**欢迎大家积极参与**感谢大家支持
+> 开发文档以及项目说明会随着项目的更新逐步完善，目前项目还在建设中 **欢迎大家积极参与** 感谢大家支持
 # 项目介绍
 本项目基于`spring boot` 对接`v2ray`与`nginx`，使用java io读取`/etc/v2ray/config.json`与`/nginx/config`配置文件实现替换文件内容
 读取文件内容生成可供各类软件读取的`vmess`、`VLESS`链接与二维码，实现快捷生成、导入、修改与获取配置
