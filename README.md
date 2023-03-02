@@ -21,7 +21,9 @@
 {domian}:{port}/proxy/modifyConfig
 ## 链接参数
 `domian`: 为服务器的域名地址
+
 `port`: 为本平台的访问端口，默认为 8201
 ## 页面内功能参数
 `port`: 为`nginx`服务器配置参数
+
 `v2rayPort`: 为 `v2ray` 的配置参数
