@@ -1,15 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
     <meta charset="UTF-8">
-    <title>展示并修改配置</title>
+    <title>代理服务端控制台</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
 <!--
 参数列表：
 port 为nginx中的port
 v2rayPort  为v2rayConfig中的端口
-
 -->
+<div>
+    <span>appPort</span>
+    <div th:text="${appPort}"></div>
+    <h3>Log:</h3>
+    <ul>
+        <li>Access: <span th:text="${message.getData().log.access}"></span></li>
+        <li>Error: <span th:text="${message.getData().log.error}"></span></li>
+        <li>LogLevel: <span th:text="${message.getData().log.loglevel}"></span></li>
+    </ul>
+
+    <!-- 遍历 inbounds -->
+    <h3>Inbounds:</h3>
+    <ul th:each="inbound : ${message.getData().inbounds}">
+        <li>Port: <span th:text="${inbound.port}"></span></li>
+        <li>Listen: <span th:text="${inbound.listen}"></span></li>
+        <li>Tag: <span th:text="${inbound.tag}"></span></li>
+        <li>Protocol: <span th:text="${inbound.protocol}"></span></li>
+        <li>Settings:</li>
+        <ul>
+            <li>clients:</li>
+            <ul>
+                <li th:each="client : ${inbound.settings.clients}">Id: <span th:text="${client.id}"></span>, AlterId: <span th:text="${client.alterId}"></span></li>
+            </ul>
+            <li>streamSettings:</li>
+            <ul>
+                <li>network: <span th:text="${inbound.streamSettings.network}"></span></li>
+                <li>wsSettings:</li>
+                <ul>
+                    <li>path: <span th:text="${inbound.streamSettings.wsSettings.path}"></span></li>
+                </ul>
+            </ul>
+        </ul>
+    </ul>
+
+    <!-- 遍历 outbounds -->
+    <h3>Outbounds:</h3>
+    <ul th:each="outbound : ${message.getData().outbounds}">
+        <li>Protocol: <span th:text="${outbound.protocol}"></span></li>
+        <li>Settings:</li>
+        <ul>
+            <!-- 这里使用了Thymeleaf的条件表达式，如果settings为空则不显示下面的内容 -->
+            <li th:if="${outbound.settings}">Empty Settings</li>
+        </ul>
+        <li>Tag: <span th:text="${outbound.tag}"></span></li>
+    </ul>
+
+    <!-- 遍历 dns -->
+    <h3>DNS:</h3>
+    <ul>
+        <li th:each="server : ${message.getData().dns.servers}">Server: <span th:text="${server}"></span></li>
+    </ul>
+
+    <!-- 遍历 routing -->
+    <h3>Routing:</h3>
+    <ul>
+        <li>DomainStrategy: <span th:text="${message.getData().routing.domainStrategy}"></span></li>
+        <li>Rules:</li>
+        <ul>
+            <li th:each="rule : ${message.getData().routing.rules}">
+                <ul>
+                    <li>Type: <span th:text="${rule.type}"></span></li>
+                    <li>InboundTag: <span th:text="${rule.inboundTag[0]}"></span></li>
+                    <li>OutboundTag: <span th:text="${rule.outboundTag}"></span></li>
+                </ul>
+            </li>
+        </ul>
+    </ul>
+</div>
 </body>
+<script th:src="@{/js/proxy.js}"></script>
 </html>
