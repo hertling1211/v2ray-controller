@@ -17,3 +17,11 @@ spring:
     time-zone: GMT+8
 server:
   port: 8201
+
+#配置v2ray的config文件地址以及v2ray文件地址
+#本配置文件中的地址仅为生产地址，再正式上线之后会改为默认地址
+configPath:
+  # v2ray 的配置路径
+  v2rayConfigPath: C:\Users\ASUS\Desktop\CoreGui\v2ray-windows-64\config.json
+  # nginx 的配置路径
+  nginxConfigPath:

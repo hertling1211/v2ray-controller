@@ -2,6 +2,7 @@ package com.tianqe.v2raycontroller.service.modifyConfigService;
 
 import com.alibaba.fastjson2.JSONObject;
 import com.tianqe.v2raycontroller.msg.resultMsg.resultMsg;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -17,7 +18,10 @@ import java.io.InputStream;
 @Service
 public class modifyTheConfig {
     // v2ray的配置文件地址
-    private static final String v2rayConfigUrl = "C:\\Users\\ASUS\\Desktop\\CoreGui\\v2ray-windows-64\\config.json";
+    @Value("${configPath.nginxConfigPath}")
+    private String nginxConfigPath;
+    @Value("${configPath.v2rayConfigPath}")
+    private String v2rayConfigPath;
 
     /**
      * 获取v2ray的配置文件
@@ -27,7 +31,8 @@ public class modifyTheConfig {
         resultMsg result = new resultMsg();
         try{
             // 获取配置文件
-            File v2rayConfigFile = new File(v2rayConfigUrl);
+            if (v2rayConfigPath == null) resultMsg.fail("未找到相关指定文件");
+            File v2rayConfigFile = new File(v2rayConfigPath);
             // 解析file文件
             InputStream v2rayStream = new FileInputStream(v2rayConfigFile);
             byte[] bytes = new byte[(int) v2rayConfigFile.length()];

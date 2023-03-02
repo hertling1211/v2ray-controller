@@ -16,7 +16,9 @@ v2rayPort  为v2rayConfig中的端口
     <div th:text="${appPort}"></div>
     <h3>Log:</h3>
     <ul>
-        <li>Access: <span th:text="${message.getData().log.access}"></span></li>
+        <li>Access:
+            <input type="text" th:placeholder="${message.getData().log.access}" />
+        </li>
         <li>Error: <span th:text="${message.getData().log.error}"></span></li>
         <li>LogLevel: <span th:text="${message.getData().log.loglevel}"></span></li>
     </ul>
