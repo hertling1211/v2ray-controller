@@ -12,8 +12,11 @@ port 为nginx中的port
 v2rayPort  为v2rayConfig中的端口
 -->
 <div>
-    <span>appPort</span>
-    <div th:text="${appPort}"></div>
+    <div>
+        <span>网站端口(server.port):</span>
+<!--        <div th:text="${appPort}"></div>-->
+        <input type="test" th:placeholder="${appPort}" />
+    </div>
     <h3>Log:</h3>
     <ul>
         <li>Access:
@@ -80,6 +83,10 @@ v2rayPort  为v2rayConfig中的端口
             </li>
         </ul>
     </ul>
+</div>
+<!--直接以json形式展示到页面-->
+<div>
+    <textarea th:text="${message.getData()}"></textarea>
 </div>
 </body>
 <script th:src="@{/js/proxy.js}"></script>
