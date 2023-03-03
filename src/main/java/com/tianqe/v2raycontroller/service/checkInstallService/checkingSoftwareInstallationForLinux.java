@@ -1,6 +1,5 @@
 package com.tianqe.v2raycontroller.service.checkInstallService;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -18,7 +17,7 @@ import java.io.InputStreamReader;
 public class checkingSoftwareInstallationForLinux {
 
     public static void checkNginxInstallation() {
-        Process process = null;
+        Process process;
         // 默认为Linux系统
         boolean judgment = true;
         try {

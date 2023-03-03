@@ -9,6 +9,7 @@ public class V2rayControllerApplication {
     public static void main(String[] args) {
         // 启动检查是否安装有v2ray以及nginx
         checkingSoftwareInstallationForLinux.checkNginxInstallation();
+
         SpringApplication.run(V2rayControllerApplication.class, args);
     }
 
