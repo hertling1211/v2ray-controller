@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>代理服务端控制台</title>
     <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/prism.css}" />
 </head>
 <body>
 <!--
@@ -11,7 +12,7 @@
 port 为nginx中的port
 v2rayPort  为v2rayConfig中的端口
 -->
-<div>
+<div class="inputContent">
     <div>
         <span>网站端口(server.port):</span>
 <!--        <div th:text="${appPort}"></div>-->
@@ -22,29 +23,49 @@ v2rayPort  为v2rayConfig中的端口
         <li>Access:
             <input type="text" th:placeholder="${message.getData().log.access}" />
         </li>
-        <li>Error: <span th:text="${message.getData().log.error}"></span></li>
-        <li>LogLevel: <span th:text="${message.getData().log.loglevel}"></span></li>
+        <li>Error:
+            <input type="text" name="" th:placeholder="${message.getData().log.error}">
+        </li>
+        <li>LogLevel:
+            <input type="text" name="" th:placeholder="${message.getData().log.loglevel}">
+        </li>
     </ul>
 
     <!-- 遍历 inbounds -->
     <h3>Inbounds:</h3>
     <ul th:each="inbound : ${message.getData().inbounds}">
-        <li>Port: <span th:text="${inbound.port}"></span></li>
-        <li>Listen: <span th:text="${inbound.listen}"></span></li>
-        <li>Tag: <span th:text="${inbound.tag}"></span></li>
-        <li>Protocol: <span th:text="${inbound.protocol}"></span></li>
+        <li>Port:
+            <input type="text" th:placeholder="${inbound.port}">
+        </li>
+        <li>Listen:
+            <input type="text" th:placeholder="${inbound.listen}">
+        </li>
+        <li>Tag:
+            <input type="text" th:placeholder="${inbound.tag}">
+        </li>
+        <li>Protocol:
+            <input type="text" th:placeholder="${inbound.protocol}">
+        </li>
         <li>Settings:</li>
         <ul>
             <li>clients:</li>
             <ul>
-                <li th:each="client : ${inbound.settings.clients}">Id: <span th:text="${client.id}"></span>, AlterId: <span th:text="${client.alterId}"></span></li>
+                <li th:each="client : ${inbound.settings.clients}">Id:
+                    <input type="text" th:placeholder="${client.id}">,
+                    AlterId:
+                    <input type="text" th:placeholder="${client.alterId}">
+                </li>
             </ul>
             <li>streamSettings:</li>
             <ul>
-                <li>network: <span th:text="${inbound.streamSettings.network}"></span></li>
+                <li>network:
+                    <input type="text" th:placeholder="${inbound.streamSettings.network}">
+                </li>
                 <li>wsSettings:</li>
                 <ul>
-                    <li>path: <span th:text="${inbound.streamSettings.wsSettings.path}"></span></li>
+                    <li>path:
+                        <input type="text" th:placeholder="${inbound.streamSettings.wsSettings.path}">
+                    </li>
                 </ul>
             </ul>
         </ul>
@@ -53,41 +74,70 @@ v2rayPort  为v2rayConfig中的端口
     <!-- 遍历 outbounds -->
     <h3>Outbounds:</h3>
     <ul th:each="outbound : ${message.getData().outbounds}">
-        <li>Protocol: <span th:text="${outbound.protocol}"></span></li>
+        <li>Protocol:
+            <input type="text" th:placeholder="${outbound.protocol}">
+        </li>
         <li>Settings:</li>
         <ul>
             <!-- 这里使用了Thymeleaf的条件表达式，如果settings为空则不显示下面的内容 -->
             <li th:if="${outbound.settings}">Empty Settings</li>
         </ul>
-        <li>Tag: <span th:text="${outbound.tag}"></span></li>
+        <li>Tag:
+            <input type="text" th:placeholder="${outbound.tag}">
+        </li>
     </ul>
 
     <!-- 遍历 dns -->
     <h3>DNS:</h3>
     <ul>
-        <li th:each="server : ${message.getData().dns.servers}">Server: <span th:text="${server}"></span></li>
+<!--        <li th:each="server : ${message.getData().dns.servers}">Server:-->
+<!--            <textarea name="" id="" cols="30" rows="10" th:placeholder="${server}"></textarea>-->
+<!--        </li>-->
+        <table>
+            <thead>
+            <tr>
+                <th>server</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="server : ${message.getData().dns.servers}">
+                <td th:text="${server}"></td>
+            </tr>
+            </tbody>
+        </table>
     </ul>
 
     <!-- 遍历 routing -->
     <h3>Routing:</h3>
     <ul>
-        <li>DomainStrategy: <span th:text="${message.getData().routing.domainStrategy}"></span></li>
+        <li>DomainStrategy:
+            <input type="text" th:placeholder="${message.getData().routing.domainStrategy}">
+        </li>
         <li>Rules:</li>
         <ul>
             <li th:each="rule : ${message.getData().routing.rules}">
                 <ul>
-                    <li>Type: <span th:text="${rule.type}"></span></li>
-                    <li>InboundTag: <span th:text="${rule.inboundTag[0]}"></span></li>
-                    <li>OutboundTag: <span th:text="${rule.outboundTag}"></span></li>
+                    <li>Type:
+                        <input type="text" th:placeholder="${rule.type}">
+                    </li>
+                    <li>InboundTag:
+                        <input type="text" th:placeholder="${rule.inboundTag[0]}">
+                    </li>
+                    <li>OutboundTag:
+                        <input type="text" th:placeholder="${rule.outboundTag}">
+                    </li>
                 </ul>
             </li>
         </ul>
     </ul>
 </div>
 <!--直接以json形式展示到页面-->
-<div>
-    <textarea th:text="${message.getData()}"></textarea>
+<div class="jsonInput">
+    <pre class="line-numbers">
+        <code class="language-css" th:text="${message.getData()}"></code>
+    </pre>
 </div>
 </body>
 <script th:src="@{/js/proxy.js}"></script>
+<script th:src="@{/js/prism.js}"></script>
 </html>
