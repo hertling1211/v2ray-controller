@@ -5,11 +5,23 @@
 > 
 > **仅作为技术交流用，不要传播！！！**
 # 项目介绍
-本项目基于`spring boot` 对接`v2ray`与`nginx`，java jdk版本为jdk11 使用java io读取`/etc/v2ray/config.json`与`/nginx/config`配置文件实现替换文件内容
+本项目基于`spring boot` 对接`v2ray`与`nginx`，使用java io读取`/etc/v2ray/config.json`与`/nginx/config`配置文件实现替换文件内容
 读取文件内容生成可供各类软件读取的`vmess`、`VLESS`链接与二维码，实现快捷生成、导入、修改与获取配置
 
 自定义订阅链接，用户可以在软件上添加订阅地址，一键更新订阅。请以管理员身份运行本程序，若环境中包含的软件未运行或运行时未发现本地有相关软件，可能
 会造成项目启动失败，推荐于`linux`系统运行本项目
+兼容jdk：openjdk-11
+
+ubuntu openjdk 下载安装命令：
+```
+sudo apt install openjdk-11-jdk
+```
+
+CentOS openjdk 下载安装命令：
+```
+ yum install -y java-11-openjdk java-11-openjdk-devel
+```
+
 
 **未来内容拓展**
 
