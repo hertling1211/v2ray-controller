@@ -17,34 +17,34 @@ import java.io.InputStreamReader;
 public class checkingSoftwareInstallationForLinux {
 
     public static void checkNginxInstallation() {
-        Process process;
+        Process process = null;
         // 默认为Linux系统
         boolean judgment = true;
         try {
             // 判断为windows还是Linux
             String osName = System.getProperty("os.name").toLowerCase();
             if (osName.contains("win")) {
-                // 当前系统为 Windows，输入cmd命令，在path指定的路径总查找相关可执行文件，如果path中未指定则会提示未找到
-                ProcessBuilder pb = new ProcessBuilder("cmd.exe", "/c", "where nginx");
-                process = pb.start();
-                // 改为false,标识为windows，下载windows版nginx
-                judgment = false;
+                // 如果是windows系统则提示系统不兼容，并停止运行
+                System.out.println("系统暂时不兼容windows系统，请改为linux系统运行");
+                System.exit(0);
+
+
+                // 当前系统为 Windows，输入cmd命令，在path指定的路径总查找相关可执行文件，如果path中未指定则会提示未找到 技术原因暂不开启windows配置
+//                ProcessBuilder pb = new ProcessBuilder("cmd.exe", "/c", "where nginx");
+//                process = pb.start();
+//                // 改为false,标识为windows，下载windows版nginx
+//                judgment = false;
             } else {
                 // 当前系统为 Linux 或其他系统
                 process = Runtime.getRuntime().exec("which nginx");
             }
+            process = Runtime.getRuntime().exec("which nginx");
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line;
             boolean v2rayInstalled = false;
             while ((line = reader.readLine()) != null) {
-                if (judgment){
-                    // 文件存在表示已经安装好
-                    if (!line.isEmpty()) {
-                        v2rayInstalled = true;
-                        break;
-                    }
-                }
-                if (line.contains("v2ray.exe")) {
+                // 文件存在表示已经安装好
+                if (!line.isEmpty()) {
                     v2rayInstalled = true;
                     break;
                 }
